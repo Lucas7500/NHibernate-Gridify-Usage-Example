@@ -1,0 +1,7 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/BookStore.API/BookStore.API.csproj" Id="9d05dba6-0b08-4791-b901-a0a049f357e4" />
+    <Project Path="src/BookStore.Domain/BookStore.Domain.csproj" Id="dea17a12-14f8-4830-88ba-daadb8493cba" />
+    <Project Path="src/BookStore.Infra/BookStore.Infra.csproj" Id="e7d3f195-6ce6-4854-8e9c-da4ff6d10104" />
+  </Folder>
+</Solution>
