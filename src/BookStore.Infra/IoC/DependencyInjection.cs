@@ -1,5 +1,6 @@
 ﻿using BookStore.Domain.Models;
 using BookStore.Domain.Persistence;
+using BookStore.Infra.NHibernate;
 using BookStore.Infra.Repositories;
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
@@ -14,7 +15,7 @@ namespace BookStore.Infra.IoC
     {
         public static void AddInfrastructureDependencies(this IServiceCollection services)
         {
-            services.AddScoped<IBooksRepository, BooksRepository>();
+            services.AddScoped<IBooksRepository, BooksRepositoryHQL>();
 
             const string DbFileName = "BookStore.db";
 
@@ -29,10 +30,8 @@ namespace BookStore.Infra.IoC
                 .ExposeConfiguration(cfg => new SchemaUpdate(cfg).Execute(false, true))
                 .BuildSessionFactory();
             
-            services.AddScoped(_ =>
-            {
-                return sessionFactory.OpenSession();
-            });
+            services.AddSingleton(sessionFactory);
+            services.AddScoped<NHibernateContext>();
         }
     }
 }
