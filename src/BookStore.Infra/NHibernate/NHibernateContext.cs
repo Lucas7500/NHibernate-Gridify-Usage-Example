@@ -2,7 +2,7 @@
 
 namespace BookStore.Infra.NHibernate
 {
-    internal class NHibernateContext(ISessionFactory sessionFactory) : IDisposable
+    internal sealed class NHibernateContext(ISessionFactory sessionFactory) : IDisposable
     {
         private readonly Lazy<ISession> _session = new(sessionFactory.OpenSession);
 
