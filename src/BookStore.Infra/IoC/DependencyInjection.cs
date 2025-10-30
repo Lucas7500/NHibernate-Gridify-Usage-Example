@@ -15,7 +15,7 @@ namespace BookStore.Infra.IoC
     {
         public static void AddInfrastructureDependencies(this IServiceCollection services)
         {
-            services.AddScoped<IBooksRepository, BooksRepositoryHQL>();
+            services.AddScoped<IQueryableBooksRepository, BooksRepositoryHQL>();
 
             const string DbFileName = "BookStore.db";
 
