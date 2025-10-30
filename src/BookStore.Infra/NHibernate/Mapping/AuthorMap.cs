@@ -7,7 +7,7 @@ namespace BookStore.Infra.NHibernate.Mapping
     {
         public AuthorMap()
         {
-            Id(a => a.Id).GeneratedBy.Increment();
+            Id(a => a.Id).GeneratedBy.Assigned();
      
             Map(a => a.Name).Not.Nullable();
 
