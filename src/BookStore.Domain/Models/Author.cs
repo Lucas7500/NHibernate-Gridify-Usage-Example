@@ -2,15 +2,15 @@
 
 namespace BookStore.Domain.Models
 {
-    public class Author
+    public class Author : Entity<Guid>
     {
         public Author(string name)
         {
-            Id = default;
+            Id = Guid.NewGuid();
             Name = name;
         }
         
-        public Author(int id, string name)
+        public Author(Guid id, string name)
             : this(name)
         {
             Id = id;
@@ -19,7 +19,6 @@ namespace BookStore.Domain.Models
         // No argument constructor for ORM
         protected Author() { }
         
-        public virtual int Id { get; protected set; }
         public virtual string Name { get; protected set; } = string.Empty;
     }
 }

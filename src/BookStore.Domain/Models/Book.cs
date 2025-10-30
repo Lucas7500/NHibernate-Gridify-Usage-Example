@@ -20,7 +20,10 @@ namespace BookStore.Domain.Models
         }
 
         // No argument constructor for ORM
-        protected Book() { }
+        protected Book() 
+        {
+            Author = null!;
+        }
 
         public virtual string Title { get; protected set; } = string.Empty;
         public virtual Author Author { get; protected set; }
