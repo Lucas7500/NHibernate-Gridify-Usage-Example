@@ -6,10 +6,10 @@ namespace BookStore.Domain.Persistence.Common
         where TEntity : AggregateRoot<TKey>
         where TKey : struct
     {
-        Task Add(TEntity entity, CancellationToken ct = default);
-        Task AddOrUpdate(TEntity entity, CancellationToken ct = default);
-        Task Update(TEntity entity, CancellationToken ct = default);
-        Task Delete(TKey id, CancellationToken ct = default);
-        Task Delete(TEntity entity, CancellationToken ct = default);
+        Task AddAsync(TEntity entity, CancellationToken ct = default);
+        Task AddOrUpdateAsync(TEntity entity, CancellationToken ct = default);
+        Task UpdateAsync(TEntity entity, CancellationToken ct = default);
+        Task DeleteAsync(TKey id, CancellationToken ct = default);
+        Task DeleteAsync(TEntity entity, CancellationToken ct = default);
     }
 }

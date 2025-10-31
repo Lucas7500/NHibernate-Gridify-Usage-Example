@@ -1,7 +1,13 @@
 <Solution>
   <Folder Name="/src/">
     <Project Path="src/BookStore.API/BookStore.API.csproj" Id="9d05dba6-0b08-4791-b901-a0a049f357e4" />
+    <Project Path="src/BookStore.Application/BookStore.Application.csproj" Id="19f8cadb-1946-4e7d-b860-598665fcac4f" />
     <Project Path="src/BookStore.Domain/BookStore.Domain.csproj" Id="dea17a12-14f8-4830-88ba-daadb8493cba" />
     <Project Path="src/BookStore.Infra/BookStore.Infra.csproj" Id="e7d3f195-6ce6-4854-8e9c-da4ff6d10104" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/BookStore.Tests.MSTest/BookStore.Tests.MSTest.csproj" Id="7a2b63eb-bb44-45f9-a0af-10a5d46f620b" />
+    <Project Path="tests/BookStore.Tests.NUnit/BookStore.Tests.NUnit.csproj" Id="55275f58-10d0-4975-87fc-17624dd1a0f6" />
+    <Project Path="tests/BookStore.Tests.xUnit/BookStore.Tests.xUnit.csproj" Id="8de412d8-02eb-416b-9536-92196bc2d1f4" />
   </Folder>
 </Solution>

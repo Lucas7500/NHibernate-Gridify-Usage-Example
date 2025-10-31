@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace BookStore.API.Controllers
+namespace BookStore.API.Controllers.v1
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class BooksController : ControllerBase
+    public class AuthorsController : ControllerBase
     {
         [HttpGet]
         public IActionResult GetAll()

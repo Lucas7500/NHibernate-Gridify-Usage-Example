@@ -1,4 +1,6 @@
 ﻿using BookStore.Domain.Models.Base;
+using BookStore.Domain.Persistence.Requests;
+using BookStore.Domain.Persistence.Responses;
 
 namespace BookStore.Domain.Persistence.Common
 {
@@ -6,9 +8,9 @@ namespace BookStore.Domain.Persistence.Common
         where TEntity : AggregateRoot<TKey>
         where TKey : struct
     {
-        Task<IEnumerable<TEntity>> GetAll(CancellationToken ct = default);
-        Task<TEntity?> Get(TKey id, CancellationToken ct = default);
+        Task<PagedResult<TEntity>> GetAllAsync(QueryRequest request, CancellationToken ct = default);
+        Task<TEntity?> GetAsync(TKey id, CancellationToken ct = default);
 
-        Task<long> Count(CancellationToken ct = default);
+        Task<long> CountAsync(CancellationToken ct = default);
     }
 }

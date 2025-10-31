@@ -1,7 +1,4 @@
-﻿using BookStore.Domain.Models;
-using BookStore.Domain.Persistence.Common;
-
-namespace BookStore.Domain.Persistence
+﻿namespace BookStore.Domain.Persistence
 {
-    public interface IBooksRepository : IRepository<Book, int>;
+    public interface IBooksRepository : IQueryableBooksRepository, IWriteableBooksRepository;
 }

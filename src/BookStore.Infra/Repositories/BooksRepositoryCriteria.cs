@@ -1,5 +1,8 @@
 ﻿using BookStore.Domain.Models;
 using BookStore.Domain.Persistence;
+using BookStore.Domain.Persistence.Requests;
+using BookStore.Domain.Persistence.Responses;
+using BookStore.Infra.Extensions;
 using BookStore.Infra.NHibernate;
 using NHibernate;
 using NHibernate.Criterion;
@@ -8,7 +11,7 @@ namespace BookStore.Infra.Repositories
 {
     internal sealed class BooksRepositoryCriteria(NHibernateContext context) : IQueryableBooksRepository
     {
-        public async Task<long> Count(CancellationToken ct = default)
+        public async Task<long> CountAsync(CancellationToken ct = default)
         {
             ICriteria criteria = context.Session.CreateCriteria<Book>();
 
@@ -17,7 +20,7 @@ namespace BookStore.Infra.Repositories
                 .UniqueResultAsync<long>(ct);
         }
 
-        public async Task<long> CountAuthors(CancellationToken ct = default)
+        public async Task<long> CountAuthorsAsync(CancellationToken ct = default)
         {
             ICriteria criteria = context.Session.CreateCriteria<Author>();
 
@@ -26,7 +29,7 @@ namespace BookStore.Infra.Repositories
                 .UniqueResultAsync<long>(ct);
         }
 
-        public async Task<Book?> Get(int id, CancellationToken ct = default)
+        public async Task<Book?> GetAsync(int id, CancellationToken ct = default)
         {
             ICriteria criteria = context.Session.CreateCriteria<Book>();
 
@@ -35,21 +38,23 @@ namespace BookStore.Infra.Repositories
                 .UniqueResultAsync<Book?>(ct);
         }
 
-        public async Task<IEnumerable<Book>> GetAll(CancellationToken ct = default)
+        public async Task<PagedResult<Book>> GetAllAsync(QueryRequest request, CancellationToken ct = default)
         {
+            // Criteria does not support Gridify directly, so we're not implementing filtering or ordering
             ICriteria criteria = context.Session.CreateCriteria<Book>();
 
-            return await criteria.ListAsync<Book>(ct);
+            return await criteria.ToPagedResultAsync<Book>(request, ct);
         }
 
-        public async Task<IEnumerable<Author>> GetAllAuthors(CancellationToken ct = default)
+        public async Task<PagedResult<Author>> GetAllAuthorsAsync(QueryRequest request, CancellationToken ct = default)
         {
+            // Criteria does not support Gridify directly, so we're not implementing filtering or ordering
             ICriteria criteria = context.Session.CreateCriteria<Author>();
 
-            return await criteria.ListAsync<Author>(ct);
+            return await criteria.ToPagedResultAsync<Author>(request, ct);
         }
 
-        public async Task<Author?> GetAuthor(Guid id, CancellationToken ct = default)
+        public async Task<Author?> GetAuthorByIdAsync(Guid id, CancellationToken ct = default)
         {
             ICriteria criteria = context.Session.CreateCriteria<Author>();
 
@@ -58,17 +63,18 @@ namespace BookStore.Infra.Repositories
                 .UniqueResultAsync<Author?>(ct);
         }
 
-        public async Task<IEnumerable<Book>> GetBooksWithAuthors(CancellationToken ct = default)
+        public async Task<PagedResult<Book>> GetBooksWithAuthorsFetchedAsync(QueryRequest request, CancellationToken ct = default)
         {
+            // Criteria does not support Gridify directly, so we're not implementing filtering or ordering
             const string BookAlias = "b";
             const string AuthorAlias = "a";
 
             ICriteria criteria = context.Session.CreateCriteria<Book>(BookAlias);
-
-            return await criteria
+            ICriteria resultQuery = criteria
                 .CreateAlias($"{BookAlias}.{nameof(Book.Author)}", AuthorAlias)
-                .Fetch(nameof(Author))
-                .ListAsync<Book>(ct);
+                .Fetch(nameof(Author));
+
+            return await resultQuery.ToPagedResultAsync<Book>(request, ct);
         }
     }
 }

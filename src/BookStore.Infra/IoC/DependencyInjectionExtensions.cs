@@ -11,7 +11,7 @@ using NHibernate.Tool.hbm2ddl;
 
 namespace BookStore.Infra.IoC
 {
-    public static class DependencyInjection
+    public static class DependencyInjectionExtensions
     {
         public static void AddInfrastructureDependencies(this IServiceCollection services)
         {
@@ -26,7 +26,7 @@ namespace BookStore.Infra.IoC
                     .Driver<SQLite20Driver>()
                     .UsingFile(DbFileName)
                     .ShowSql())
-                .Mappings(m => m.FluentMappings.AddFromAssembly(typeof(DependencyInjection).Assembly))
+                .Mappings(m => m.FluentMappings.AddFromAssembly(typeof(DependencyInjectionExtensions).Assembly))
                 .ExposeConfiguration(cfg => new SchemaUpdate(cfg).Execute(false, true))
                 .BuildSessionFactory();
             
