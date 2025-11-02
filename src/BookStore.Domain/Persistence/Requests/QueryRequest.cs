@@ -1,8 +1,6 @@
-﻿using Gridify;
-
-namespace BookStore.Domain.Persistence.Requests
+﻿namespace BookStore.Domain.Persistence.Requests
 {
-    public record QueryRequest : IGridifyQuery
+    public record QueryRequest
     {
         public int Page { get; set; }
         public int PageSize { get; set; }

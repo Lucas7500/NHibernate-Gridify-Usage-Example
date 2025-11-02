@@ -1,6 +1,8 @@
-﻿namespace BookStore.Application.UseCases.Books
+﻿using BookStore.Application.UseCases.Books.Contracts;
+
+namespace BookStore.Application.UseCases.Books
 {
-    internal class GetBooksUseCase
+    internal sealed class GetBooksUseCase : IGetBooksUseCase
     {
     }
 }

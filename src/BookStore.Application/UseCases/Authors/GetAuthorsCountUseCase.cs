@@ -1,6 +1,8 @@
-﻿namespace BookStore.Application.UseCases.Authors
+﻿using BookStore.Application.UseCases.Authors.Contracts;
+
+namespace BookStore.Application.UseCases.Authors
 {
-    internal class GetAuthorsCountUseCase
+    internal sealed class GetAuthorsCountUseCase : IGetAuthorsCountUseCase
     {
     }
 }

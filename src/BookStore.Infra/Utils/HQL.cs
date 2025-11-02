@@ -1,4 +1,5 @@
 ﻿using BookStore.Domain.Models.Base;
+using BookStore.Domain.ValueObjects.Contracts;
 using NHibernate;
 
 namespace BookStore.Infra.Utils
@@ -11,15 +12,16 @@ namespace BookStore.Infra.Utils
                 .CreateQuery("from :table")
                 .SetParameter("table", typeof(TEntity).Name);
         }
-        
-        public static IQuery GetByIdQuery<TEntity, TKey>(ISession session, TKey id) 
-            where TEntity : Entity<TKey>
-            where TKey : struct
+
+        public static IQuery GetByIdQuery<TEntity, TKey, TKeyValue>(ISession session, TKey id)
+            where TKeyValue : struct
+            where TKey : IStronglyTypedId<TKeyValue>
+            where TEntity : Entity<TKey, TKeyValue>
         {
             return session
                 .CreateQuery("from entity :table e where e.Id = :id")
                 .SetParameter("table", typeof(TEntity).Name)
-                .SetParameter("id", id);
+                .SetParameter("id", id.Value);
         }
 
         public static IQuery CountQuery<TEntity>(ISession session) where TEntity : Entity

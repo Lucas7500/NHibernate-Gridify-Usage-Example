@@ -1,10 +1,12 @@
 ﻿using BookStore.Domain.Models.Base;
+using BookStore.Domain.ValueObjects.Contracts;
 
-namespace BookStore.Domain.Persistence.Common
+namespace BookStore.Domain.Persistence.Contracts.Base
 {
-    public interface IWriteableRepository<TEntity, TKey>
-        where TEntity : AggregateRoot<TKey>
-        where TKey : struct
+    public interface IWriteableRepository<TEntity, TKey, TKeyValue>
+        where TKeyValue : struct
+        where TKey : IStronglyTypedId<TKeyValue>
+        where TEntity : AggregateRoot<TKey, TKeyValue>
     {
         Task AddAsync(TEntity entity, CancellationToken ct = default);
         Task AddOrUpdateAsync(TEntity entity, CancellationToken ct = default);

@@ -5,7 +5,16 @@ namespace BookStore.Tests.xUnit
         [Fact]
         public void Test1()
         {
+        }
 
+        public struct Teste
+        {
+            public Teste(string a)
+            {
+                A = a;
+            }
+
+            public string A { get; }
         }
     }
 }

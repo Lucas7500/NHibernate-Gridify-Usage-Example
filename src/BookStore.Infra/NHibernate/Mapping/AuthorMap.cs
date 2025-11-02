@@ -1,4 +1,5 @@
-﻿using BookStore.Domain.Models;
+﻿using BookStore.Domain.Models.AuthorModel;
+using BookStore.Infra.Constants;
 using FluentNHibernate.Mapping;
 
 namespace BookStore.Infra.NHibernate.Mapping
@@ -7,11 +8,21 @@ namespace BookStore.Infra.NHibernate.Mapping
     {
         public AuthorMap()
         {
-            Id(a => a.Id).GeneratedBy.Assigned();
-     
-            Map(a => a.Name).Not.Nullable();
+            Table(AuthorTableConstants.TableName);
 
-            Table("authors");
+            Id(a => a.IdValue)
+                .GeneratedBy.Assigned()
+                .Column(AuthorTableConstants.Columns.Id);
+     
+            Map(a => a.Name)
+                .Not.Nullable()
+                .Column(AuthorTableConstants.Columns.Name);
+
+            HasMany(x => x.Books)
+                .KeyColumn(BookTableConstants.Columns.Author)
+                .Inverse()
+                .Cascade.None();
+
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using BookStore.Domain.Models;
+﻿using BookStore.Domain.Models.BookModel;
+using BookStore.Infra.Constants;
 using FluentNHibernate.Mapping;
 
 namespace BookStore.Infra.NHibernate.Mapping
@@ -7,18 +8,31 @@ namespace BookStore.Infra.NHibernate.Mapping
     {
         public BookMap()
         {
-            Id(b => b.Id).GeneratedBy.Increment();
+            Table("books");
 
-            Map(b => b.Title).Not.Nullable().Length(200);
-            Map(b => b.Price).Not.Nullable().Precision(2);
-            Map(b => b.IsAvailable).Not.Nullable();
+            Id(b => b.IdValue)
+                .GeneratedBy.Identity()
+                .Column(BookTableConstants.Columns.Id);
+
+            Map(b => b.Title)
+                .Not.Nullable()
+                .Length(200)
+                .Column(BookTableConstants.Columns.Title);
+
+            Map(b => b.Price)
+                .Not.Nullable()
+                .Precision(5)
+                .Scale(2)
+                .Column(BookTableConstants.Columns.Price);
+            
+            Map(b => b.IsAvailable)
+                .Not.Nullable()
+                .Column(BookTableConstants.Columns.IsAvailable);
 
             References(b => b.Author)
-                .Column("AuthorId")
+                .Column(BookTableConstants.Columns.Author)
                 .Not.Nullable()
                 .Cascade.None();
-
-            Table("books");
         }
     }
 }
