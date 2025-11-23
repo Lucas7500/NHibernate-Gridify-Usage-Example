@@ -1,8 +1,9 @@
 ﻿using BookStore.Application.UseCases.Authors.Contracts;
+using BookStore.Domain.Persistence.Contracts.Authors;
 
 namespace BookStore.Application.UseCases.Authors
 {
-    internal sealed class UpdateAuthorUseCase : IUpdateAuthorUseCase
+    internal sealed class UpdateAuthorUseCase(IWriteableAuthorsRepository authorsRepository) : IUpdateAuthorUseCase
     {
     }
 }

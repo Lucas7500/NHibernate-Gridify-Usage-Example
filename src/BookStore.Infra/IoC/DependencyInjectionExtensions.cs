@@ -60,8 +60,11 @@ namespace BookStore.Infra.IoC
 
         public static void AddRepositories(this IServiceCollection services)
         {
-            services.AddScoped<IQueryableBooksRepository, BooksRepositoryQueryOver>();
-            services.AddScoped<IQueryableAuthorsRepository, AuthorsRepositoryQueryOver>();
+            services.AddScoped<IQueryableBooksRepository, BooksRepositoryLINQ>();
+            services.AddScoped<IWriteableBooksRepository, BooksRepositoryLINQ>();
+
+            services.AddScoped<IQueryableAuthorsRepository, AuthorsRepositoryLINQ>();
+            services.AddScoped<IWriteableAuthorsRepository, AuthorsRepositoryLINQ>();
         }
 
         public static void RunDatabaseMigrations(this IHost host)
