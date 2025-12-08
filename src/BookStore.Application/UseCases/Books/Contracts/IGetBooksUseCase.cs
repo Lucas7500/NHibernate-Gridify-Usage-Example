@@ -5,5 +5,5 @@ using BookStore.Domain.Persistence.Responses;
 
 namespace BookStore.Application.UseCases.Books.Contracts
 {
-    public interface IGetBooksUseCase : IUseCase<QueryRequest, PagedResult<BookResponse>>;
+    public interface IGetBooksUseCase : IUseCase<QueryRequest, PagedResult<BookOnlyResponse>>;
 }

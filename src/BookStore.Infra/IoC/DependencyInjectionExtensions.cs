@@ -1,7 +1,10 @@
-﻿using BookStore.Domain.Persistence.Contracts.Authors;
+﻿using BookStore.Application.QueryServices.Contracts;
+using BookStore.Domain.Persistence.Contracts.Authors;
 using BookStore.Domain.Persistence.Contracts.Books;
 using BookStore.Infra.Migrations.Migrations;
 using BookStore.Infra.NHibernate;
+using BookStore.Infra.QueryServices.Authors;
+using BookStore.Infra.QueryServices.Books;
 using BookStore.Infra.Repositories.Authors;
 using BookStore.Infra.Repositories.Books;
 using FluentMigrator.Runner;
@@ -60,11 +63,11 @@ namespace BookStore.Infra.IoC
 
         public static void AddRepositories(this IServiceCollection services)
         {
-            services.AddScoped<IQueryableBooksRepository, BooksRepositoryLINQ>();
-            services.AddScoped<IWriteableBooksRepository, BooksRepositoryLINQ>();
+            services.AddScoped<IBooksQueryService, BooksLinqQueryService>();
+            services.AddScoped<IAuthorsQueryService, AuthorsLinqQueryService>();
 
-            services.AddScoped<IQueryableAuthorsRepository, AuthorsRepositoryLINQ>();
-            services.AddScoped<IWriteableAuthorsRepository, AuthorsRepositoryLINQ>();
+            services.AddScoped<IBooksRepository, BooksRepository>();
+            services.AddScoped<IAuthorsRepository, AuthorsRepository>();
         }
 
         public static void RunDatabaseMigrations(this IHost host)

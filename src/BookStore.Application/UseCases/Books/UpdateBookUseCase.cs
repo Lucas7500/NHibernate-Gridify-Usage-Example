@@ -3,7 +3,7 @@ using BookStore.Domain.Persistence.Contracts.Books;
 
 namespace BookStore.Application.UseCases.Books
 {
-    internal sealed class UpdateBookUseCase(IWriteableBooksRepository booksRepository) : IUpdateBookUseCase
+    internal sealed class UpdateBookUseCase(IBooksRepository booksRepository) : IUpdateBookUseCase
     {
     }
 }

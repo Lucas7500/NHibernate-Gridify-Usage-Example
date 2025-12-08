@@ -4,5 +4,5 @@ using BookStore.Domain.ValueObjects;
 
 namespace BookStore.Domain.Persistence.Contracts.Authors
 {
-    public interface IWriteableAuthorsRepository : IWriteableRepository<Author, AuthorId, Guid>;
+    public interface IAuthorsRepository : IRepository<Author, AuthorId, Guid>;
 }

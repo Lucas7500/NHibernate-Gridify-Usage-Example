@@ -3,7 +3,7 @@ using BookStore.Domain.Models.AuthorModel;
 
 namespace BookStore.Application.Mappers
 {
-    internal static class AuthorsMapperExtensions
+    public static class AuthorsMapperExtensions
     {
         public static AuthorResponse ToResponse(this Author author)
         {

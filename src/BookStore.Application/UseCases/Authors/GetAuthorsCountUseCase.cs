@@ -1,9 +1,9 @@
-﻿using BookStore.Application.UseCases.Authors.Contracts;
-using BookStore.Domain.Persistence.Contracts.Authors;
+﻿using BookStore.Application.QueryServices.Contracts;
+using BookStore.Application.UseCases.Authors.Contracts;
 
 namespace BookStore.Application.UseCases.Authors
 {
-    internal sealed class GetAuthorsCountUseCase(IQueryableAuthorsRepository authorsRepository) : IGetAuthorsCountUseCase
+    internal sealed class GetAuthorsCountUseCase(IAuthorsQueryService authorsQueryService) : IGetAuthorsCountUseCase
     {
     }
 }

@@ -16,7 +16,7 @@ namespace BookStore.API.Controllers.v1
         public async Task<IActionResult> GetAll(
             [FromQuery] int page, 
             [FromQuery] int pageSize, 
-            [FromQuery] string? filter, 
+            [FromQuery] string? filter,
             [FromQuery] string? orderBy,
             [FromServices] IGetBooksUseCase getBooksUseCase,
             CancellationToken cancellationToken)
@@ -29,7 +29,7 @@ namespace BookStore.API.Controllers.v1
                 OrderBy = orderBy
             };
 
-            PagedResult<BookResponse> result = await getBooksUseCase.ExecuteAsync(request, cancellationToken);
+            PagedResult<BookOnlyResponse> result = await getBooksUseCase.ExecuteAsync(request, cancellationToken);
 
             return Ok(result);
         }

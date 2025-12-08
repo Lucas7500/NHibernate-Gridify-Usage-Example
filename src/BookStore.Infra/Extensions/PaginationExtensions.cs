@@ -1,8 +1,10 @@
-﻿using BookStore.Domain.Persistence.Responses;
+﻿using BookStore.Domain.Models.AuthorModel;
+using BookStore.Domain.Persistence.Responses;
 using Gridify;
 using NHibernate;
 using NHibernate.Criterion;
 using NHibernate.Linq;
+using NHibernate.Transform;
 
 namespace BookStore.Infra.Extensions
 {
@@ -54,6 +56,24 @@ namespace BookStore.Infra.Extensions
             return new PagedResult<T>(paginationRequest.Page, paginationRequest.PageSize, count, items);
         }
         
+        internal static async Task<PagedResult<TDto>> ToPagedResultWithDtoAsync<TEntity, TDto>(
+            this IQueryOver<TEntity, TEntity> source,
+            IGridifyPagination paginationRequest,
+            CancellationToken ct = default)
+        {
+            int count = await source
+                .ToRowCountQuery()
+                .SingleOrDefaultAsync<int>(ct);
+
+            IList<TDto> items = await source
+                .TransformUsing(Transformers.AliasToBean<TDto>())
+                .Skip((paginationRequest.Page - 1) * paginationRequest.PageSize)
+                .Take(paginationRequest.PageSize)
+                .ListAsync<TDto>(ct);
+
+            return new PagedResult<TDto>(paginationRequest.Page, paginationRequest.PageSize, count, items);
+        }
+        
         internal static async Task<PagedResult<T>> ToPagedResultAsync<T>(
             this ICriteria source,
             IGridifyPagination paginationRequest,
@@ -66,6 +86,24 @@ namespace BookStore.Infra.Extensions
             IList<T> items = await source
                 .SetFirstResult((paginationRequest.Page - 1) * paginationRequest.PageSize)
                 .SetMaxResults(paginationRequest.PageSize)
+                .ListAsync<T>(ct);
+
+            return new PagedResult<T>(paginationRequest.Page, paginationRequest.PageSize, count, items);
+        }
+        
+        internal static async Task<PagedResult<T>> ToPagedResultWithDtoAsync<T>(
+            this ICriteria source,
+            IGridifyPagination paginationRequest,
+            CancellationToken ct = default)
+        {
+            int count = await source
+                .SetProjection(Projections.RowCount())
+                .UniqueResultAsync<int>(ct);
+
+            IList<T> items = await source
+                .SetFirstResult((paginationRequest.Page - 1) * paginationRequest.PageSize)
+                .SetMaxResults(paginationRequest.PageSize)
+                .SetResultTransformer(Transformers.AliasToBean<T>())
                 .ListAsync<T>(ct);
 
             return new PagedResult<T>(paginationRequest.Page, paginationRequest.PageSize, count, items);

@@ -1,5 +1,6 @@
-﻿using BookStore.Domain.Models.BookModel;
-using BookStore.Domain.Persistence.Contracts.Books;
+﻿using BookStore.Application.DTOs.Books.Responses;
+using BookStore.Application.QueryServices.Contracts;
+using BookStore.Domain.Models.BookModel;
 using BookStore.Domain.Persistence.Requests;
 using BookStore.Domain.Persistence.Responses;
 using BookStore.Domain.ValueObjects;
@@ -7,20 +8,21 @@ using BookStore.Infra.Extensions;
 using BookStore.Infra.Mappers;
 using BookStore.Infra.NHibernate;
 using NHibernate;
+using NHibernate.Transform;
 
-namespace BookStore.Infra.Repositories.Books
+namespace BookStore.Infra.QueryServices.Books
 {
-    internal sealed class BooksRepositoryQueryOver(NHibernateContext context) : IQueryableBooksRepository
+    internal sealed class BooksQueryOverQueryService(NHibernateContext context) : IBooksQueryService
     {
-        public async Task<PagedResult<Book>> GetAllAsync(QueryRequest request, CancellationToken ct = default)
+        public async Task<PagedResult<BookOnlyResponse>> GetAllAsync(QueryRequest request, CancellationToken ct = default)
         {
             // QueryOver does not support Gridify directly, so we're not implementing filtering or ordering
             IQueryOver<Book, Book> query = context.Session.QueryOver<Book>();
 
-            return await query.ToPagedResultAsync(request.ToGridifyQuery(), ct);
+            return await query.ToPagedResultWithDtoAsync<Book, BookOnlyResponse>(request.ToGridifyQuery(), ct);
         }
 
-        public async Task<PagedResult<Book>> GetAllWithAuthorsFetchedAsync(QueryRequest request, CancellationToken ct = default)
+        public async Task<PagedResult<BookWithAuthorResponse>> GetAllWithAuthorsFetchedAsync(QueryRequest request, CancellationToken ct = default)
         {
             // QueryOver does not support Gridify directly, so we're not implementing filtering or ordering
             IQueryOver<Book, Book> query = context
@@ -28,16 +30,17 @@ namespace BookStore.Infra.Repositories.Books
                 .QueryOver<Book>()
                 .Fetch(SelectMode.Fetch, b => b.Author);
 
-            return await query.ToPagedResultAsync(request.ToGridifyQuery(), ct);
+            return await query.ToPagedResultWithDtoAsync<Book, BookWithAuthorResponse>(request.ToGridifyQuery(), ct);
         }
 
-        public async Task<Book?> GetAsync(BookId id, CancellationToken ct = default)
+        public async Task<BookWithAuthorResponse?> GetByIdAsync(BookId id, CancellationToken ct = default)
         {
             IQueryOver<Book, Book> query = context.Session.QueryOver<Book>();
 
             return await query
                 .Where(b => b.IdValue == id.Value)
-                .SingleOrDefaultAsync(ct);
+                .TransformUsing(Transformers.AliasToBean<BookWithAuthorResponse>())
+                .SingleOrDefaultAsync<BookWithAuthorResponse>(ct);
         }
 
         public async Task<long> CountAsync(CancellationToken ct = default)
