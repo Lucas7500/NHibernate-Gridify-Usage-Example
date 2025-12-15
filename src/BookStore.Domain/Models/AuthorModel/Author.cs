@@ -23,7 +23,7 @@ namespace BookStore.Domain.Models.AuthorModel
         public virtual string Name { get; protected set; } = string.Empty;
         public virtual ICollection<Book> Books { get; protected set; } = [];
 
-        public void ChangeName(string name)
+        public virtual void ChangeName(string name)
         {
             Name = name;
         }

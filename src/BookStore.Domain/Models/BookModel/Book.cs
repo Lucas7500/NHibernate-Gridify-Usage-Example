@@ -32,27 +32,27 @@ namespace BookStore.Domain.Models.BookModel
         public virtual bool IsAvailable { get; protected set; }
         public virtual Author Author { get; protected set; } = null!;
 
-        public void ChangeTitle(string newTitle)
+        public virtual void ChangeTitle(string newTitle)
         {
             Title = newTitle;
         }
 
-        public void ChangePrice(decimal newPrice)
+        public virtual void ChangePrice(decimal newPrice)
         {
             Price = newPrice;
         }
 
-        public void MarkAsUnavailable()
+        public virtual void MarkAsUnavailable()
         {
             IsAvailable = false;
         }
         
-        public void MarkAsAvailable()
+        public virtual void MarkAsAvailable()
         {
             IsAvailable = true;
         }
 
-        public void ChangeAuthor(Author newAuthor)
+        public virtual void ChangeAuthor(Author newAuthor)
         {
             Author = newAuthor;
         }
