@@ -1,4 +1,8 @@
-﻿using BookStore.Application.UseCases.Authors;
+﻿using BookStore.Application.DTOs.Authors.Requests;
+using BookStore.Application.DTOs.Authors.Requests.Validation;
+using BookStore.Application.DTOs.Books.Requests;
+using BookStore.Application.DTOs.Books.Requests.Validation;
+using BookStore.Application.UseCases.Authors;
 using BookStore.Application.UseCases.Authors.Contracts;
 using BookStore.Application.UseCases.Books;
 using BookStore.Application.UseCases.Books.Contracts;
@@ -17,7 +21,11 @@ namespace BookStore.Application.IoC
         
         public static void AddApplicationValidators(this IServiceCollection services)
         {
-            services.AddValidatorsFromAssembly(typeof(BookStore.Application.AssemblyReference).Assembly);
+            services.AddScoped<IValidator<AddBookRequest>, AddBookRequestValidator>();
+            services.AddScoped<IValidator<UpdateBookRequest>, UpdateBookRequestValidator>();
+
+            services.AddScoped<IValidator<AddAuthorRequest>, AddAuthorRequestValidator>();
+            services.AddScoped<IValidator<UpdateAuthorRequest>, UpdateAuthorRequestValidator>();
         }
 
         private static void AddAuthorUseCases(this IServiceCollection services)

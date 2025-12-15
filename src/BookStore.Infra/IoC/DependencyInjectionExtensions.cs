@@ -1,5 +1,8 @@
-﻿using BookStore.Domain.Persistence.Contracts;
+﻿using BookStore.Application.QueryServices.Contracts;
+using BookStore.Domain.Persistence.Contracts;
 using BookStore.Infra.NHibernate;
+using BookStore.Infra.QueryServices.Authors;
+using BookStore.Infra.QueryServices.Books;
 using FluentMigrator.Runner;
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
@@ -58,6 +61,12 @@ namespace BookStore.Infra.IoC
         public static void AddUnitOfWork(this IServiceCollection services)
         {
             services.AddScoped<IUnitOfWork, NHibernateUnitOfWork>();
+        }
+        
+        public static void AddQueryServices(this IServiceCollection services)
+        {
+            services.AddScoped<IBooksQueryService, BooksLinqQueryService>();
+            services.AddScoped<IAuthorsQueryService, AuthorsLinqQueryService>();
         }
 
         public static void RunDatabaseMigrations(this IHost host)
