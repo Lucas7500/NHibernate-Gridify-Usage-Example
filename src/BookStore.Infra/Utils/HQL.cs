@@ -6,14 +6,14 @@ namespace BookStore.Infra.Utils
 {
     internal static class HQL
     {
-        public static IQuery GetAllQuery<TEntity>(ISession session) where TEntity : Entity
+        internal static IQuery GetAllQuery<TEntity>(ISession session) where TEntity : Entity
         {
             return session
                 .CreateQuery("from :table")
                 .SetParameter("table", typeof(TEntity).Name);
         }
 
-        public static IQuery GetByIdQuery<TEntity, TKey, TKeyValue>(ISession session, TKey id)
+        internal static IQuery GetByIdQuery<TEntity, TKey, TKeyValue>(ISession session, TKey id)
             where TKeyValue : struct
             where TKey : IStronglyTypedId<TKeyValue>
             where TEntity : Entity<TKey, TKeyValue>
@@ -24,7 +24,7 @@ namespace BookStore.Infra.Utils
                 .SetParameter("id", id.Value);
         }
 
-        public static IQuery CountQuery<TEntity>(ISession session) where TEntity : Entity
+        internal static IQuery CountQuery<TEntity>(ISession session) where TEntity : Entity
         {
             return session
                 .CreateQuery("select count(*) from :table")

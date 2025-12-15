@@ -3,7 +3,7 @@ using Gridify;
 
 namespace BookStore.Infra.Mappers
 {
-    internal static class GridifyMappers
+    internal static class GridifyMapperExtensions
     {
         public static IGridifyQuery ToGridifyQuery(this QueryRequest request)
         {

@@ -1,12 +1,10 @@
-﻿using BookStore.Application.DTOs.Authors.Responses;
-using BookStore.Application.DTOs.Books.Responses;
+﻿using BookStore.Application.DTOs.Books.Responses;
 using BookStore.Application.Mappers;
 using BookStore.Application.QueryServices.Contracts;
 using BookStore.Domain.Models.BookModel;
 using BookStore.Domain.Persistence.Requests;
 using BookStore.Domain.Persistence.Responses;
 using BookStore.Domain.ValueObjects;
-using BookStore.Infra.Extensions;
 using BookStore.Infra.Mappers;
 using BookStore.Infra.NHibernate;
 using Gridify;

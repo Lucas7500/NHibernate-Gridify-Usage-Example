@@ -1,5 +1,4 @@
-﻿using BookStore.Domain.Models.AuthorModel;
-using BookStore.Domain.Persistence.Responses;
+﻿using BookStore.Domain.Persistence.Responses;
 using Gridify;
 using NHibernate;
 using NHibernate.Criterion;

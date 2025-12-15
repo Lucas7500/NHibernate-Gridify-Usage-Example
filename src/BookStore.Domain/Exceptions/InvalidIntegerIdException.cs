@@ -1,6 +1,6 @@
 ﻿namespace BookStore.Domain.Exceptions
 {
-    internal class InvalidIntegerIdException(string value) : Exception($"The provided value is not a valid integer id: {value}")
+    public sealed class InvalidIntegerIdException(string value) : Exception($"The provided value is not a valid integer id: {value}")
     {
         public static void ThrowIfInvalidIntegerId(string id)
         {

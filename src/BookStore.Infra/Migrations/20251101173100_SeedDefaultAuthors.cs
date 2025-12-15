@@ -1,8 +1,9 @@
 ﻿using BookStore.Domain.ValueObjects;
-using BookStore.Infra.Constants;
 using FluentMigrator;
 
-namespace BookStore.Infra.Migrations.Migrations
+using static BookStore.Infra.Constants.AuthorTableConstants;
+
+namespace BookStore.Infra.Migrations
 {
     [Migration(20251101173100)]
     public class _20251101173100_SeedDefaultAuthors : Migration
@@ -12,14 +13,14 @@ namespace BookStore.Infra.Migrations.Migrations
 
         public override void Up()
         {
-            Insert.IntoTable(AuthorTableConstants.TableName)
+            Insert.IntoTable(TableName)
                 .Row(new { id = author1Id.Value, name = "George Orwell" })
                 .Row(new { id = author2Id.Value, name = "J.R.R. Tolkien" });
         }
 
         public override void Down()
         {
-            Delete.FromTable(AuthorTableConstants.TableName)
+            Delete.FromTable(TableName)
                 .Row(new { id = author1Id.Value })
                 .Row(new { id = author2Id.Value });
         }

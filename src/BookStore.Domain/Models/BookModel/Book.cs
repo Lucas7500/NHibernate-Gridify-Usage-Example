@@ -28,9 +28,34 @@ namespace BookStore.Domain.Models.BookModel
         protected Book() { }
 
         public virtual string Title { get; protected set; } = string.Empty;
-        public virtual Author Author { get; protected set; } = null!;
         public virtual decimal Price { get; protected set; }
         public virtual bool IsAvailable { get; protected set; }
+        public virtual Author Author { get; protected set; } = null!;
+
+        public void ChangeTitle(string newTitle)
+        {
+            Title = newTitle;
+        }
+
+        public void ChangePrice(decimal newPrice)
+        {
+            Price = newPrice;
+        }
+
+        public void MarkAsUnavailable()
+        {
+            IsAvailable = false;
+        }
+        
+        public void MarkAsAvailable()
+        {
+            IsAvailable = true;
+        }
+
+        public void ChangeAuthor(Author newAuthor)
+        {
+            Author = newAuthor;
+        }
 
         protected override void SetId(int value)
         {

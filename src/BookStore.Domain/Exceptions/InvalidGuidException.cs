@@ -1,6 +1,6 @@
 ﻿namespace BookStore.Domain.Exceptions
 {
-    public class InvalidGuidException(string value) : Exception($"The provided value is not a valid GUID: {value}")
+    public sealed class InvalidGuidException(string value) : Exception($"The provided value is not a valid GUID: {value}")
     {
         public static void ThrowIfInvalidGuid(string guid)
         {

@@ -1,5 +1,4 @@
-﻿using BookStore.Domain.Exceptions;
-using BookStore.Domain.Models.Base;
+﻿using BookStore.Domain.Models.Base;
 using BookStore.Domain.Models.Base.BusinessRules;
 using BookStore.Domain.Models.BookModel;
 using BookStore.Domain.ValueObjects;
@@ -23,6 +22,11 @@ namespace BookStore.Domain.Models.AuthorModel
         
         public virtual string Name { get; protected set; } = string.Empty;
         public virtual ICollection<Book> Books { get; protected set; } = [];
+
+        public void ChangeName(string name)
+        {
+            Name = name;
+        }
 
         protected override void SetId(Guid value)
         {

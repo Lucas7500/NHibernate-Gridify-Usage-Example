@@ -2,6 +2,7 @@
 using BookStore.Application.UseCases.Authors.Contracts;
 using BookStore.Application.UseCases.Books;
 using BookStore.Application.UseCases.Books.Contracts;
+using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace BookStore.Application.IoC
@@ -12,6 +13,11 @@ namespace BookStore.Application.IoC
         {
             services.AddBookUseCases();
             services.AddAuthorUseCases();
+        }
+        
+        public static void AddApplicationValidators(this IServiceCollection services)
+        {
+            services.AddValidatorsFromAssembly(typeof(BookStore.Application.AssemblyReference).Assembly);
         }
 
         private static void AddAuthorUseCases(this IServiceCollection services)

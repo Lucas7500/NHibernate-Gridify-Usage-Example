@@ -1,6 +1,8 @@
-﻿namespace BookStore.Application.UseCases.Books.Contracts
+﻿using BookStore.Application.DTOs.Books.Requests;
+using BookStore.Application.DTOs.Books.Responses;
+using BookStore.Application.UseCases.Contracts;
+
+namespace BookStore.Application.UseCases.Books.Contracts
 {
-    public interface IUpdateBookUseCase
-    {
-    }
+    public interface IUpdateBookUseCase : IUseCase<UpdateBookRequest, UpdateBookResponse>;
 }

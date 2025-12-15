@@ -1,8 +1,9 @@
 ﻿using BookStore.Domain.ValueObjects;
-using BookStore.Infra.Constants;
 using FluentMigrator;
 
-namespace BookStore.Infra.Migrations.Migrations
+using static BookStore.Infra.Constants.BookTableConstants;
+
+namespace BookStore.Infra.Migrations
 {
     [Migration(20251101173200)]
     public class _20251101173200_SeedDefaultBooks : Migration
@@ -12,7 +13,7 @@ namespace BookStore.Infra.Migrations.Migrations
 
         public override void Up()
         {
-            Insert.IntoTable(BookTableConstants.TableName)
+            Insert.IntoTable(TableName)
                 .Row(new
                 {
                     title = "1984",
@@ -38,7 +39,7 @@ namespace BookStore.Infra.Migrations.Migrations
 
         public override void Down()
         {
-            Delete.FromTable(BookTableConstants.TableName)
+            Delete.FromTable(TableName)
                 .Row(new { title = "1984" })
                 .Row(new { title = "Animal Farm" })
                 .Row(new { title = "The Hobbit" });

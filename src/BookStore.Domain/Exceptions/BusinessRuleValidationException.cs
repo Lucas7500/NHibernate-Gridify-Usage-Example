@@ -1,7 +1,7 @@
 ﻿namespace BookStore.Domain.Exceptions
 {
     [Serializable]
-    public class BusinessRuleValidationException : Exception
+    public sealed class BusinessRuleValidationException : Exception
     {
         public BusinessRuleValidationException()
         {
