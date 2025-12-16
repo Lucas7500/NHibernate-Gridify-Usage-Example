@@ -30,16 +30,10 @@ namespace BookStore.API.Controllers.v1
             };
 
             ErrorOr<PagedResult<AuthorResponse>> result = await getAuthorsUseCase.ExecuteAsync(request, cancellationToken);
-
-            if (result.IsError)
-            {
-                return BadRequest(result.Errors);
-            }
-
-            return Ok(result);
+            return OkOrBadRequest(result);
         }
 
-        [HttpGet("/{id:guid}")]
+        [HttpGet("{id:guid}")]
         public async Task<IActionResult> GetAuthorById(
             [FromRoute] Guid id,
             [FromServices] IGetAuthorByIdUseCase getAuthorById,
@@ -50,7 +44,7 @@ namespace BookStore.API.Controllers.v1
             return OkOrBadRequest(result);
         }
 
-        [HttpGet("/count")]
+        [HttpGet("count")]
         public async Task<IActionResult> GetAuthorsCount(
             [FromServices] IGetAuthorsCountUseCase getAuthorsCountUseCase,
             CancellationToken cancellationToken)
@@ -66,7 +60,6 @@ namespace BookStore.API.Controllers.v1
             CancellationToken cancellationToken)
         {
             ErrorOr<AddAuthorResponse> result = await addAuthorUseCase.ExecuteAsync(request, cancellationToken);
-
             return OkOrBadRequest(result);
         }
 

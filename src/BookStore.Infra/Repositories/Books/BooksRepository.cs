@@ -35,7 +35,10 @@ namespace BookStore.Infra.Repositories.Books
 
         public async Task DeleteAsync(BookId id, CancellationToken ct = default)
         {
-            await session.DeleteAsync(id.Value, ct);
+            await session
+                .Query<Book>()
+                .Where(b => b.IdValue == id.Value)
+                .DeleteAsync(ct);
         }
 
         public async Task DeleteAsync(Book entity, CancellationToken ct = default)

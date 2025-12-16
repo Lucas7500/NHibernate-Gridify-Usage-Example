@@ -30,16 +30,10 @@ namespace BookStore.API.Controllers.v1
             };
 
             ErrorOr<PagedResult<BookOnlyResponse>> result = await getBooksUseCase.ExecuteAsync(request, cancellationToken);
-
-            if (result.IsError)
-            {
-                return BadRequest(result.Errors);
-            }
-
-            return Ok(result);
+            return OkOrBadRequest(result);
         }
 
-        [HttpGet("/authors-fetched")]
+        [HttpGet("authors-fetched")]
         public async Task<IActionResult> GetAllBooksWithAuthorsFetched(
             [FromQuery] int page,
             [FromQuery] int pageSize,
@@ -60,7 +54,7 @@ namespace BookStore.API.Controllers.v1
             return OkOrBadRequest(result);
         }
 
-        [HttpGet("/{id:int}")]
+        [HttpGet("{id:int}")]
         public async Task<IActionResult> GetBookById(
             [FromRoute] int id,
             [FromServices] IGetBookByIdUseCase getBookById,
@@ -71,7 +65,7 @@ namespace BookStore.API.Controllers.v1
             return OkOrBadRequest(result);
         }
         
-        [HttpGet("/count")]
+        [HttpGet("count")]
         public async Task<IActionResult> GetBooksCount(
             [FromServices] IGetBooksCountUseCase getBooksCountUseCase,
             CancellationToken cancellationToken)

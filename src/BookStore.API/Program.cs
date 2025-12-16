@@ -12,14 +12,15 @@ builder.Services.AddQueryServices();
 builder.Services.AddApplicationUseCases();
 builder.Services.AddApplicationValidators();
 builder.Services.AddValidation();
-
-builder.Services.AddApiVersioning();
+builder.Services.AddApiVersioningConfiguration();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerConfiguration();
+builder.Services.AddRoutingAdditionalConfiguration();
 
 var app = builder.Build();
 
 app.RunDatabaseMigrations();
+app.UseSwaggerInDevelopment();
 app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();

@@ -20,7 +20,7 @@ namespace BookStore.Application.UseCases.Books
                     return Error.NotFound(description: "The book with the specified Id was not found.");
                 }
 
-                await unitOfWork.BooksRepository.DeleteAsync(request, cancellationToken);
+                await unitOfWork.BooksRepository.DeleteAsync(book, cancellationToken);
                 await unitOfWork.CommitAsync(cancellationToken);
 
                 return new DeleteBookResponse($"Book with Id {request.Value} deleted successfully.");

@@ -20,7 +20,7 @@ namespace BookStore.Application.UseCases.Authors
                     return Error.NotFound(description: "The author with the specified Id was not found.");
                 }
 
-                await unitOfWork.AuthorsRepository.DeleteAsync(request, cancellationToken);
+                await unitOfWork.AuthorsRepository.DeleteAsync(author, cancellationToken);
                 await unitOfWork.CommitAsync(cancellationToken);
 
                 return new DeleteAuthorResponse($"Author with Id {request.Value} deleted successfully.");
