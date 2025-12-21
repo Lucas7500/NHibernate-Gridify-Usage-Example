@@ -6,7 +6,7 @@ namespace BookStore.Tests.xUnit.DomainTests.ExceptionsTests
     {
         private static readonly Faker _faker = new();
 
-        public class UsingStandardAssertions
+        public sealed class UsingStandardAssertions
         {
             [Fact]
             public void Constructor_GivenValue_ThenShouldSetMessage()
@@ -22,9 +22,8 @@ namespace BookStore.Tests.xUnit.DomainTests.ExceptionsTests
             {
                 string invalidGuid = _faker.Random.Word();
 
-                InvalidGuidException exception = Assert
-                    .Throws<InvalidGuidException>(
-                        () => InvalidGuidException.ThrowIfInvalidGuid(invalidGuid));
+                InvalidGuidException exception = Assert.Throws<InvalidGuidException>(
+                    () => InvalidGuidException.ThrowIfInvalidGuid(invalidGuid));
 
                 Assert.Equal($"The provided value is not a valid GUID: {invalidGuid}", exception.Message);
             }
@@ -45,9 +44,8 @@ namespace BookStore.Tests.xUnit.DomainTests.ExceptionsTests
             {
                 Guid emptyGuid = Guid.Empty;
                 
-                InvalidGuidException exception = Assert
-                    .Throws<InvalidGuidException>(
-                        () => InvalidGuidException.ThrowIfEmpty(emptyGuid));
+                InvalidGuidException exception = Assert.Throws<InvalidGuidException>(
+                    () => InvalidGuidException.ThrowIfEmpty(emptyGuid));
                 
                 Assert.Equal($"The provided value is not a valid GUID: {emptyGuid}", exception.Message);
             }
@@ -64,7 +62,7 @@ namespace BookStore.Tests.xUnit.DomainTests.ExceptionsTests
             }
         }
 
-        public class UsingFluentAssertions
+        public sealed class UsingFluentAssertions
         {
             [Fact]
             public void Constructor_GivenValue_ThenShouldSetMessage()
@@ -85,7 +83,7 @@ namespace BookStore.Tests.xUnit.DomainTests.ExceptionsTests
                 Action throwIfInvalidAction = () => InvalidGuidException.ThrowIfInvalidGuid(invalidGuid);
                 
                 throwIfInvalidAction.Should()
-                    .Throw<InvalidGuidException>()
+                    .ThrowExactly<InvalidGuidException>()
                     .WithMessage($"The provided value is not a valid GUID: {invalidGuid}");
             }
 
@@ -102,8 +100,9 @@ namespace BookStore.Tests.xUnit.DomainTests.ExceptionsTests
             {
                 Guid emptyGuid = Guid.Empty;
                 Action throwIfEmptyAction = () => InvalidGuidException.ThrowIfEmpty(emptyGuid);
+                
                 throwIfEmptyAction.Should()
-                    .Throw<InvalidGuidException>()
+                    .ThrowExactly<InvalidGuidException>()
                     .WithMessage($"The provided value is not a valid GUID: {emptyGuid}");
             }
 

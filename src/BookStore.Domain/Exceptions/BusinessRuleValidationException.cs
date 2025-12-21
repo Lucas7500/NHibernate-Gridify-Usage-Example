@@ -3,10 +3,6 @@
     [Serializable]
     public sealed class BusinessRuleValidationException : Exception
     {
-        public BusinessRuleValidationException()
-        {
-        }
-
         public BusinessRuleValidationException(string? message) : base(message)
         {
         }

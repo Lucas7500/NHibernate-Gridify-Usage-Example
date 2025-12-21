@@ -14,14 +14,14 @@ namespace BookStore.Domain.ValueObjects
 
         public BookId(int value)
         {
-            InvalidIntegerIdException.ThrowIfEmpty(value);
+            InvalidIntegerIdException.ThrowIfNegativeOrZero(value);
 
             Value = value;
         }
 
         public BookId(string valueStr)
         {
-            InvalidIntegerIdException.ThrowIfInvalidIntegerId(valueStr);
+            InvalidIntegerIdException.ThrowIfNegativeOrZero(valueStr);
 
             Value = int.Parse(valueStr);
         }

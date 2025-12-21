@@ -33,7 +33,6 @@
     <Folder Include="ApiTests\" />
     <Folder Include="ApplicationTests\" />
     <Folder Include="ArchitectureTests\" />
-    <Folder Include="DomainTests\" />
     <Folder Include="InfrastructureTests\" />
   </ItemGroup>
 
