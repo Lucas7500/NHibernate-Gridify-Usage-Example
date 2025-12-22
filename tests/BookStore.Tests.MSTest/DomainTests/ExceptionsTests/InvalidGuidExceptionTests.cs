@@ -8,7 +8,7 @@ namespace BookStore.Tests.MSTest.DomainTests.ExceptionsTests
         private Faker _faker = null!;
 
         [TestInitialize]
-        public void Initialize()
+        public void TestInitialize()
         {
             _faker = new Faker();
         }
