@@ -1,4 +1,5 @@
-﻿using BookStore.Domain.Models.Base;
+﻿using BookStore.Domain.Models.AuthorModel.BusinessRules;
+using BookStore.Domain.Models.Base;
 using BookStore.Domain.Models.Base.BusinessRules;
 using BookStore.Domain.Models.BookModel;
 using BookStore.Domain.ValueObjects;
@@ -10,8 +11,10 @@ namespace BookStore.Domain.Models.AuthorModel
         public Author(string name) : base(AuthorId.NewId())
         {
             Name = name;
+
+            CheckRule(new AuthorNameMustHaveDefinedLength(this));
         }
-        
+
         public Author(AuthorId id, string name) : base(id)
         {
             Name = name;
@@ -26,14 +29,14 @@ namespace BookStore.Domain.Models.AuthorModel
         public virtual void ChangeName(string name)
         {
             Name = name;
+
+            CheckRule(new AuthorNameMustHaveDefinedLength(this));
         }
 
         protected override void SetId(Guid value)
         {
             var id = new AuthorId(value);
-
             CheckRule(new ProvidedIdCantBeEmpty<AuthorId, Guid>(id));
-
             Id = id;
         }
     }

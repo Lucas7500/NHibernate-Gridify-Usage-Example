@@ -33,7 +33,7 @@ namespace BookStore.Application.UseCases.Books
                     return Error.NotFound(description: "Author not found.");
                 }
 
-                Book newBook = new(request.Title, author, request.Price);
+                Book newBook = new(request.Title, request.Price, author);
 
                 await unitOfWork.BooksRepository.AddAsync(newBook, cancellationToken);
                 await unitOfWork.CommitAsync(cancellationToken);
