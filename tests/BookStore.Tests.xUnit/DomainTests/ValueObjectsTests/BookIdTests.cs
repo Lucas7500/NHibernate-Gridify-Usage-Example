@@ -6,7 +6,7 @@ namespace BookStore.Tests.xUnit.DomainTests.ValueObjectsTests
 {
     public static class BookIdTests
     {
-        public static readonly Faker _faker = new();
+        private static readonly Faker _faker = new();
 
         public sealed class UsingStandardAssertions
         {

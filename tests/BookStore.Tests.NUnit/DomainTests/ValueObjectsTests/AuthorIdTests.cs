@@ -7,7 +7,7 @@ namespace BookStore.Tests.NUnit.DomainTests.ValueObjectsTests
     [TestFixture]
     public sealed class AuthorIdTests
     {
-        public Faker _faker;
+        private Faker _faker;
 
         [SetUp]
         public void SetUp()

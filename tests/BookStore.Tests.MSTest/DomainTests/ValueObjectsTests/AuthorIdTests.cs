@@ -7,7 +7,7 @@ namespace BookStore.Tests.MSTest.DomainTests.ValueObjectsTests
     [TestClass]
     public sealed class AuthorIdTests
     {
-        public Faker _faker = null!;
+        private Faker _faker = null!;
 
         [TestInitialize]
         public void TestInitialize()

@@ -31,7 +31,7 @@ namespace BookStore.Infra.IoC
                 .ConfigureRunner(rb => rb
                     .AddPostgres()
                     .WithGlobalConnectionString(connectionString)
-                    .ScanIn(typeof(AssemblyReference).Assembly).For.Migrations()
+                    .ScanIn(typeof(IAssemblyReference).Assembly).For.Migrations()
                 );
         }
 

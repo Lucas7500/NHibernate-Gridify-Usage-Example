@@ -15,7 +15,7 @@ namespace BookStore.Domain.Models.Base.BusinessRules
             _id = id;
         }
 
-        public string Description => "Provided Id Can't be Empty";
+        public string Description => "businessrule.provided-id-cant-be-empty";
 
         public bool IsBroken() => _id is not { HasValue: true };
     }

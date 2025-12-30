@@ -44,11 +44,13 @@ namespace BookStore.Domain.Models.BookModel
         public virtual void ChangeTitle(string newTitle)
         {
             Title = newTitle;
+            CheckRule(new BookTitleMustHaveDefinedLength(this));
         }
 
         public virtual void ChangePrice(decimal newPrice)
         {
             Price = newPrice;
+            CheckRule(new BookPriceMustBePositive(this));
         }
 
         public virtual void MarkAsUnavailable()
@@ -64,6 +66,7 @@ namespace BookStore.Domain.Models.BookModel
         public virtual void ChangeAuthor(Author newAuthor)
         {
             Author = newAuthor;
+            CheckRule(new BookMustHaveAnAuthor(this));
         }
 
         protected override void SetId(int value)

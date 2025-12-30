@@ -11,13 +11,13 @@ namespace BookStore.Domain.Models.AuthorModel
         public Author(string name) : base(AuthorId.NewId())
         {
             Name = name;
-
             CheckRule(new AuthorNameMustHaveDefinedLength(this));
         }
 
         public Author(AuthorId id, string name) : base(id)
         {
             Name = name;
+            CheckRule(new AuthorNameMustHaveDefinedLength(this));
         }
 
         // No args constructor for ORM
@@ -29,7 +29,6 @@ namespace BookStore.Domain.Models.AuthorModel
         public virtual void ChangeName(string name)
         {
             Name = name;
-
             CheckRule(new AuthorNameMustHaveDefinedLength(this));
         }
 
