@@ -6,9 +6,9 @@ using Microsoft.OpenApi;
 
 namespace BookStore.API.Extensions
 {
-    public static class ApplicationExtensions
+    internal static class ApplicationExtensions
     {
-        public static void AddApiVersioningConfiguration(this IServiceCollection services)
+        internal static void AddApiVersioningConfiguration(this IServiceCollection services)
         {
             services.AddApiVersioning(options =>
             {
@@ -23,7 +23,7 @@ namespace BookStore.API.Extensions
             });
         }
 
-        public static void AddRoutingAdditionalConfiguration(this IServiceCollection services)
+        internal static void AddRoutingAdditionalConfiguration(this IServiceCollection services)
         {
             services.AddRouting(options =>
             {
@@ -32,7 +32,7 @@ namespace BookStore.API.Extensions
             });
         }
 
-        public static void AddSwaggerConfiguration(this IServiceCollection services)
+        internal static void AddSwaggerConfiguration(this IServiceCollection services)
         {
             services.AddSwaggerGen(options =>
             {
@@ -44,7 +44,7 @@ namespace BookStore.API.Extensions
             });
         }
 
-        public static void UseSwaggerInDevelopment(this WebApplication app)
+        internal static void UseSwaggerInDevelopment(this WebApplication app)
         {
             if (app.Environment.IsDevelopment())
             {
@@ -58,7 +58,7 @@ namespace BookStore.API.Extensions
             }
         }
 
-        public static void AddExceptionHandler(this IApplicationBuilder app)
+        internal static void AddExceptionHandler(this IApplicationBuilder app)
         {
             app.UseExceptionHandler(errorApp =>
             {

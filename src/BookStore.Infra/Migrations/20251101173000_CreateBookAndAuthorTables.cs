@@ -6,7 +6,7 @@ using Book = BookStore.Infra.Constants.BookTableConstants;
 namespace BookStore.Infra.Migrations
 {
     [Migration(20251101173000)]
-    public class _20251101173000_CreateBookAndAuthorTables : Migration
+    public sealed class CreateBookAndAuthorTables : Migration
     {
         public override void Up()
         {

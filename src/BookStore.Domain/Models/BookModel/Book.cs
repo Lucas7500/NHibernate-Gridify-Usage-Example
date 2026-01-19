@@ -71,7 +71,7 @@ namespace BookStore.Domain.Models.BookModel
 
         protected override void SetId(int value)
         {
-            var id = new BookId(value);
+            BookId id = new(value);
             CheckRule(new ProvidedIdCantBeEmpty<BookId, int>(id));
             Id = id;
         }

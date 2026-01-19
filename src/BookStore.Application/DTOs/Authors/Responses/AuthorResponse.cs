@@ -1,4 +1,4 @@
 ﻿namespace BookStore.Application.DTOs.Authors.Responses
 {
-    public record AuthorResponse(Guid Id, string Name);
+    public sealed record AuthorResponse(Guid Id, string Name);
 }

@@ -31,7 +31,7 @@ namespace BookStore.Infra.IoC
                 .ConfigureRunner(rb => rb
                     .AddPostgres()
                     .WithGlobalConnectionString(connectionString)
-                    .ScanIn(typeof(IAssemblyReference).Assembly).For.Migrations()
+                    .ScanIn(typeof(AssemblyReference).Assembly).For.Migrations()
                 );
         }
 
@@ -51,7 +51,7 @@ namespace BookStore.Infra.IoC
                     .Driver<NpgsqlDriver>()
                     .ConnectionString(connectionString)
                     .ShowSql())
-                .Mappings(m => m.FluentMappings.AddFromAssembly(typeof(DependencyInjectionExtensions).Assembly))
+                .Mappings(m => m.FluentMappings.AddFromAssembly(typeof(AssemblyReference).Assembly))
                 .BuildSessionFactory();
 
             services.AddSingleton(sessionFactory);

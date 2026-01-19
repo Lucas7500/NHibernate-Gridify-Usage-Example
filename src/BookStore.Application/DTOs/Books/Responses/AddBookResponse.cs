@@ -1,4 +1,4 @@
 ﻿namespace BookStore.Application.DTOs.Books.Responses
 {
-    public record AddBookResponse(BookWithAuthorResponse CreatedBook);
+    public sealed record AddBookResponse(BookWithAuthorResponse CreatedBook);
 }

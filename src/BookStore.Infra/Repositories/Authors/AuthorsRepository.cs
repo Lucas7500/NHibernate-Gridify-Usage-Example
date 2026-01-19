@@ -5,7 +5,5 @@ using NHibernate;
 
 namespace BookStore.Infra.Repositories.Authors
 {
-    internal sealed class AuthorsRepository(ISession session) : RepositoryBase<Author, AuthorId, Guid>(session), IAuthorsRepository
-    {
-    }
+    internal sealed class AuthorsRepository(ISession session) : RepositoryBase<Author, AuthorId, Guid>(session), IAuthorsRepository;
 }

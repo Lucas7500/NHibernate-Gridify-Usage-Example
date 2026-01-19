@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace BookStore.Application.DTOs.Books.Requests
 {
-    public record UpdateBookRequest
+    public sealed record UpdateBookRequest
     {
         [Required]
         [IntegerId]

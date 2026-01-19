@@ -6,9 +6,9 @@ using static BookStore.Infra.Constants.AuthorTableConstants;
 
 namespace BookStore.Infra.NHibernate.Mapping
 {
-    public class AuthorMap : ClassMap<Author>
+    internal sealed class AuthorMap : ClassMap<Author>
     {
-        public AuthorMap()
+        internal AuthorMap()
         {
             Table(TableName);
 

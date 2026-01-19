@@ -2,7 +2,8 @@
 
 namespace BookStore.Application.Validation.Attributes
 {
-    public class NonNegativeAttribute : ValidationAttribute
+    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field)]
+    public sealed class NonNegativeAttribute : ValidationAttribute
     {
         protected override ValidationResult? IsValid(object? value, ValidationContext validationContext)
         {

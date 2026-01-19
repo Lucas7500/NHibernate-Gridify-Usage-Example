@@ -44,7 +44,6 @@
   <ItemGroup>
     <Folder Include="ApiTests\" />
     <Folder Include="ApplicationTests\" />
-    <Folder Include="ArchitectureTests\" />
     <Folder Include="InfrastructureTests\" />
   </ItemGroup>
 

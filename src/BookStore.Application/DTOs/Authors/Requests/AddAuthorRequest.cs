@@ -4,7 +4,7 @@ using static BookStore.Application.DTOs.Authors.Requests.Constants.AuthorValidat
 
 namespace BookStore.Application.DTOs.Authors.Requests
 {
-    public record AddAuthorRequest
+    public sealed record AddAuthorRequest
     {
         [Required]
         [Length(NameMinLength, NameMaxLength)]

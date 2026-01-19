@@ -1,4 +1,4 @@
 ﻿namespace BookStore.Application.DTOs.Authors.Responses
 {
-    public record UpdateAuthorResponse(string Message);
+    public sealed record UpdateAuthorResponse(string Message);
 }

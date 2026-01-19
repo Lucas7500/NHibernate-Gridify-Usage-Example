@@ -2,13 +2,13 @@
 {
     internal static class AuthorTableConstants
     {
-        public const string TableName = "authors";
+        internal const string TableName = "authors";
 
         internal static class Columns
         {
-            public const string Id = "id";
-            public const string Name = "name";
-            public const string Books = "books";
+            internal const string Id = "id";
+            internal const string Name = "name";
+            internal const string Books = "books";
         }
     }
 }

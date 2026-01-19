@@ -6,7 +6,7 @@ using static BookStore.Infra.Constants.AuthorTableConstants;
 namespace BookStore.Infra.Migrations
 {
     [Migration(20251101173100)]
-    public class _20251101173100_SeedDefaultAuthors : Migration
+    public sealed class SeedDefaultAuthors : Migration
     {
         private static readonly AuthorId author1Id = new("11111111-1111-1111-1111-111111111111");
         private static readonly AuthorId author2Id = new("22222222-2222-2222-2222-222222222222");

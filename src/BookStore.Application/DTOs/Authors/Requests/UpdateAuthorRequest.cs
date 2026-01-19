@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace BookStore.Application.DTOs.Authors.Requests
 {
-    public record UpdateAuthorRequest
+    public sealed record UpdateAuthorRequest
     {
         [Required]
         [NotEmptyGuid]

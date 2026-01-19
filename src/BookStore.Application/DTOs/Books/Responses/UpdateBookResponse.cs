@@ -1,4 +1,4 @@
 ﻿namespace BookStore.Application.DTOs.Books.Responses
 {
-    public record UpdateBookResponse(string Message);
+    public sealed record UpdateBookResponse(string Message);
 }

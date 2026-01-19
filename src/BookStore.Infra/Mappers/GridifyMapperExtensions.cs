@@ -5,7 +5,7 @@ namespace BookStore.Infra.Mappers
 {
     internal static class GridifyMapperExtensions
     {
-        public static IGridifyQuery ToGridifyQuery(this QueryRequest request)
+        internal static IGridifyQuery ToGridifyQuery(this QueryRequest request)
         {
             return new GridifyQuery
             {

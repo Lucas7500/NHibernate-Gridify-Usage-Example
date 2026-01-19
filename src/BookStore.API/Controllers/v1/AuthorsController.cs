@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace BookStore.API.Controllers.v1
 {
     [Route("api/v{version:apiVersion}/[controller]")]
-    public class AuthorsController : ApiBase
+    public sealed class AuthorsController : ApiBase
     {
         [HttpGet]
         public async Task<IActionResult> GetAllAuthors(

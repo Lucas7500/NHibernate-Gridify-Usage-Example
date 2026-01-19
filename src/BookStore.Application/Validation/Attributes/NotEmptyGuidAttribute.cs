@@ -2,7 +2,8 @@
 
 namespace BookStore.Application.Validation.Attributes
 {
-    public class NotEmptyGuidAttribute : ValidationAttribute
+    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field)]
+    public sealed class NotEmptyGuidAttribute : ValidationAttribute
     {
         protected override ValidationResult? IsValid(object? value, ValidationContext validationContext)
         {

@@ -6,7 +6,7 @@ namespace BookStore.API.Controllers.v1
 {
     [ApiController]
     [ApiVersion("1.0")]
-    public class ApiBase : ControllerBase
+    public abstract class ApiBase : ControllerBase
     {
         protected IActionResult OkOrBadRequest<T>(ErrorOr<T> result)
         {

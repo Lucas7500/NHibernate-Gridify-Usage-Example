@@ -1,4 +1,6 @@
-﻿using BookStore.Tests.xUnit.ArchitectureTests.Utils;
+﻿using Asp.Versioning;
+using BookStore.Tests.xUnit.ArchitectureTests.Utils;
+using Microsoft.AspNetCore.Mvc;
 using NetArchTest.Rules;
 
 namespace BookStore.Tests.xUnit.ArchitectureTests
@@ -7,27 +9,68 @@ namespace BookStore.Tests.xUnit.ArchitectureTests
     {
         public sealed class UsingStandardAssertions
         {
-            public sealed class UsingFluentAssertions
+            [Fact]
+            public void Controllers_ShouldNotDependOnInfrastructure()
             {
-                [Fact]
-                public void Controllers_ShouldNotDependOnInfrastructure()
-                {
-                    var result = Types
-                        .InAssembly(typeof(API.IAssemblyReference).Assembly)
-                        .That()
-                        .ResideInNamespace($"{Namespaces.API}.Controllers")
-                        .Should()
-                        .NotHaveDependencyOn(Namespaces.Infrastructure)
-                        .GetResult();
+                TestResult result = Types
+                    .InAssembly(typeof(API.AssemblyReference).Assembly)
+                    .That()
+                    .ResideInNamespace(Namespaces.API + ".Controllers")
+                    .Should()
+                    .NotHaveDependencyOn(Namespaces.Infrastructure)
+                    .GetResult();
 
-                    Assert.True(result.IsSuccessful);
-                }
+                Assert.True(result.IsSuccessful);
+            }
+            
+            [Fact]
+            public void Controllers_ShouldBeVersionedCorrectly()
+            {
+                TestResult result = Types
+                    .InAssembly(typeof(API.AssemblyReference).Assembly)
+                    .That()
+                    .Inherit(typeof(ControllerBase))
+                    .Should()
+                    .HaveCustomAttribute(typeof(ApiVersionAttribute))
+                    .And()
+                    .ResideInNamespaceEndingWith(".v1")
+                    .GetResult();
+
+                Assert.True(result.IsSuccessful);
             }
         }
 
         public sealed class UsingFluentAssertions
         {
+            [Fact]
+            public void Controllers_ShouldNotDependOnInfrastructure()
+            {
+                TestResult result = Types
+                    .InAssembly(typeof(API.AssemblyReference).Assembly)
+                    .That()
+                    .ResideInNamespace(Namespaces.API + ".Controllers")
+                    .Should()
+                    .NotHaveDependencyOn(Namespaces.Infrastructure)
+                    .GetResult();
 
+                result.IsSuccessful.Should().BeTrue();
+            }
+
+            [Fact]
+            public void Controllers_ShouldBeVersionedCorrectly()
+            {
+                TestResult result = Types
+                    .InAssembly(typeof(API.AssemblyReference).Assembly)
+                    .That()
+                    .Inherit(typeof(ControllerBase))
+                    .Should()
+                    .HaveCustomAttribute(typeof(ApiVersionAttribute))
+                    .And()
+                    .ResideInNamespaceEndingWith(".v1")
+                    .GetResult();
+
+                result.IsSuccessful.Should().BeTrue();
+            }
         }
     }
 }

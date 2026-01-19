@@ -34,7 +34,7 @@ namespace BookStore.Domain.Models.AuthorModel
 
         protected override void SetId(Guid value)
         {
-            var id = new AuthorId(value);
+            AuthorId id = new(value);
             CheckRule(new ProvidedIdCantBeEmpty<AuthorId, Guid>(id));
             Id = id;
         }

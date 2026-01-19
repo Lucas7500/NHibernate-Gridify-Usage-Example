@@ -5,7 +5,7 @@ using static BookStore.Application.DTOs.Books.Requests.Constants.BookValidationC
 
 namespace BookStore.Application.DTOs.Books.Requests
 {
-    public record AddBookRequest
+    public sealed record AddBookRequest
     {
         [Required]
         [Length(TitleMinLength, TitleMaxLength)]

@@ -3,7 +3,7 @@ using BookStore.Domain.ValueObjects.Contracts;
 
 namespace BookStore.Domain.Models.Base.BusinessRules
 {
-    internal class ProvidedIdCantBeEmpty<TKey, TKeyValue>
+    internal sealed class ProvidedIdCantBeEmpty<TKey, TKeyValue>
         : IBusinessRule
         where TKeyValue : struct
         where TKey : IStronglyTypedId<TKeyValue>
