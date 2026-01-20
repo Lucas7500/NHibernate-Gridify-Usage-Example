@@ -15,13 +15,12 @@ namespace BookStore.Domain.Models.BookModel.BusinessRules
 
         public bool IsBroken()
         {
-            const int minLength = 1;
             const int maxLength = 200;
             
             if (string.IsNullOrWhiteSpace(_book.Title))
                 return true;
             
-            return _book.Title.Length < minLength || _book.Title.Length > maxLength;
+            return _book.Title.Length > maxLength;
         }
     }
 }

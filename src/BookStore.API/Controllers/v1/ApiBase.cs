@@ -1,11 +1,8 @@
-﻿using Asp.Versioning;
-using ErrorOr;
+﻿using ErrorOr;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookStore.API.Controllers.v1
 {
-    [ApiController]
-    [ApiVersion("1.0")]
     public abstract class ApiBase : ControllerBase
     {
         protected IActionResult OkOrBadRequest<T>(ErrorOr<T> result)

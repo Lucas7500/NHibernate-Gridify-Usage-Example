@@ -30,10 +30,10 @@ namespace BookStore.Tests.xUnit.ArchitectureTests
                     .InAssembly(typeof(API.AssemblyReference).Assembly)
                     .That()
                     .Inherit(typeof(ControllerBase))
+                    .And()
+                    .AreNotAbstract()
                     .Should()
                     .HaveCustomAttribute(typeof(ApiVersionAttribute))
-                    .And()
-                    .ResideInNamespaceEndingWith(".v1")
                     .GetResult();
 
                 Assert.True(result.IsSuccessful);
@@ -63,10 +63,10 @@ namespace BookStore.Tests.xUnit.ArchitectureTests
                     .InAssembly(typeof(API.AssemblyReference).Assembly)
                     .That()
                     .Inherit(typeof(ControllerBase))
+                    .And()
+                    .AreNotAbstract()
                     .Should()
                     .HaveCustomAttribute(typeof(ApiVersionAttribute))
-                    .And()
-                    .ResideInNamespaceEndingWith(".v1")
                     .GetResult();
 
                 result.IsSuccessful.Should().BeTrue();

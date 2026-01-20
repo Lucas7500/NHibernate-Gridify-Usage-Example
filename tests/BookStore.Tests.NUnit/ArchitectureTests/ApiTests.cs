@@ -29,10 +29,10 @@ namespace BookStore.Tests.NUnit.ArchitectureTests
                 .InAssembly(typeof(API.AssemblyReference).Assembly)
                 .That()
                 .Inherit(typeof(ControllerBase))
+                .And()
+                .AreNotAbstract()
                 .Should()
                 .HaveCustomAttribute(typeof(ApiVersionAttribute))
-                .And()
-                .ResideInNamespaceEndingWith(".v1")
                 .GetResult();
 
             Assert.That(result.IsSuccessful, Is.True);

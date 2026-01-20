@@ -1,4 +1,5 @@
-﻿using BookStore.Application.DTOs.Books.Requests;
+﻿using Asp.Versioning;
+using BookStore.Application.DTOs.Books.Requests;
 using BookStore.Application.DTOs.Books.Responses;
 using BookStore.Application.UseCases.Books.Contracts;
 using BookStore.Domain.Persistence.Requests;
@@ -9,6 +10,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BookStore.API.Controllers.v1
 {
+    [ApiController]
+    [ApiVersion("1.0")]
     [Route("api/v{version:apiVersion}/[controller]")]
     public sealed class BooksController : ApiBase
     {
